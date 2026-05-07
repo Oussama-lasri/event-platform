@@ -3,8 +3,12 @@ import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/authRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
-
+import registrationRoutes from "./routes/registrationRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 import connectDB from "./config/db.js";
+
 
 dotenv.config();
 
@@ -26,3 +30,7 @@ app.listen(PORT, () => {
 });
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/registrations", registrationRoutes);
+app.use("/api/categories", categoryRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/dashboard", dashboardRoutes);
