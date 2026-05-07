@@ -3,6 +3,7 @@ import express from "express";
 import {
   getUsers,
   deleteUser,
+  getProfile,
 } from "../controllers/userController.js";
 
 import authMiddleware from "../middleware/authMiddleware.js";
@@ -23,6 +24,12 @@ router.delete(
   authMiddleware,
 //   adminMiddleware,
   deleteUser
+);
+
+router.get(
+  "/profile",
+  authMiddleware,
+  getProfile
 );
 
 export default router;
