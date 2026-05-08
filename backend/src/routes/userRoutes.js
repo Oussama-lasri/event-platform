@@ -15,14 +15,14 @@ const router = express.Router();
 router.get(
   "/",
   authMiddleware,
-//   adminMiddleware,
+  adminMiddleware,
   getUsers
 );
 
 router.delete(
   "/:id",
   authMiddleware,
-//   adminMiddleware,
+  adminMiddleware,
   deleteUser
 );
 

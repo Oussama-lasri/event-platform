@@ -16,7 +16,7 @@ router.get("/", getCategories);
 router.post(
   "/",
   authMiddleware,
-//   adminMiddleware,
+  adminMiddleware,
   createCategory
 );
 

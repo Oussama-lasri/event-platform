@@ -20,14 +20,14 @@ router.get("/:id", getEventById);
 router.post(
   "/",
   authMiddleware,
-//   adminMiddleware,
+  adminMiddleware,
   createEvent
 );
 
 router.put(
   "/:id",
   authMiddleware,
-//   adminMiddleware,
+  adminMiddleware,
   updateEvent
 );
 
