@@ -89,38 +89,99 @@ function Events() {
   const statusOptions = useMemo(() => ["upcoming", "ongoing", "finished", "cancelled"], []);
 
   return (
-    <div className="space-y-5">
-      <section className="rounded-2xl bg-gradient-to-r from-slate-900 to-indigo-900 p-8 text-white">
-        <p className="text-xs uppercase tracking-widest text-indigo-200">Discover</p>
-        <h1 className="mt-2 text-3xl font-bold md:text-4xl">Find remarkable events near you</h1>
-        <p className="mt-2 max-w-2xl text-sm text-indigo-100">Curated experiences with fast filtering, elegant cards, and frictionless registration.</p>
-      </section>
-      <Card className="mb-1">
-        <div className="grid gap-3 md:grid-cols-5">
-          <Input placeholder="Search title..." value={filters.search} onChange={(e) => setFilters({ ...filters, search: e.target.value })} />
-          <Select value={filters.category} onChange={(e) => setFilters({ ...filters, category: e.target.value })}>
-            <option value="">All categories</option>
-            {categories.map((category) => (
-              <option key={category._id} value={category._id}>
-                {category.name}
-              </option>
-            ))}
-          </Select>
-          <Select value={filters.status} onChange={(e) => setFilters({ ...filters, status: e.target.value })}>
-            <option value="">All statuses</option>
-            {statusOptions.map((status) => (
-              <option key={status} value={status}>
-                {status}
-              </option>
-            ))}
-          </Select>
-          <Input type="date" value={filters.date} onChange={(e) => setFilters({ ...filters, date: e.target.value })} />
-          <Button variant="secondary" onClick={() => setFilters({ search: "", category: "", status: "", date: "" })}>
-            Clear
+    <div className="space-y-8">
+      {/* Hero Section */}
+      <div className="text-center py-12">
+        <div className="mx-auto max-w-3xl">
+          <h1 className="text-4xl font-bold text-slate-900 mb-4">
+            Discover Amazing <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">Events</span>
+          </h1>
+          <p className="text-xl text-slate-600 mb-8">
+            Find and register for the best events in your area. From conferences to workshops, we've got you covered.
+          </p>
+          <div className="flex justify-center space-x-4">
+            <div className="flex items-center text-slate-500">
+              <svg className="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+              {events.length} Events Available
+            </div>
+            <div className="flex items-center text-slate-500">
+              <svg className="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Easy Registration
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Filters */}
+      <div className="card-modern p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-bold text-slate-900">Filter Events</h2>
+          <Button
+            variant="secondary"
+            onClick={() => setFilters({ search: "", category: "", status: "", date: "" })}
+            className="text-sm"
+          >
+            Clear Filters
           </Button>
         </div>
-      </Card>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+
+        <div className="grid gap-4 md:grid-cols-5">
+          <div className="md:col-span-2">
+            <label className="block text-sm font-medium text-slate-700 mb-2">Search Events</label>
+            <Input
+              placeholder="Search by title..."
+              value={filters.search}
+              onChange={(e) => setFilters({ ...filters, search: e.target.value })}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Category</label>
+            <Select
+              value={filters.category}
+              onChange={(e) => setFilters({ ...filters, category: e.target.value })}
+            >
+              <option value="">All categories</option>
+              {categories.map((category) => (
+                <option key={category._id} value={category._id}>
+                  {category.name}
+                </option>
+              ))}
+            </Select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Status</label>
+            <Select
+              value={filters.status}
+              onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+            >
+              <option value="">All statuses</option>
+              {statusOptions.map((status) => (
+                <option key={status} value={status}>
+                  {status}
+                </option>
+              ))}
+            </Select>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Date</label>
+            <Input
+              type="date"
+              value={filters.date}
+              onChange={(e) => setFilters({ ...filters, date: e.target.value })}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Events Grid */}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {paginatedItems.map((event) => (
           <EventCard
             key={event._id}
@@ -131,7 +192,21 @@ function Events() {
           />
         ))}
       </div>
-      {!events.length && <p className="rounded-lg border border-dashed border-slate-300 p-8 text-center text-slate-500">No events found.</p>}
+
+      {!events.length && (
+        <div className="text-center py-16">
+          <div className="flex h-24 w-24 items-center justify-center rounded-full bg-slate-100 mx-auto mb-6">
+            <svg className="h-12 w-12 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 className="text-xl font-semibold text-slate-900 mb-2">No events found</h3>
+          <p className="text-slate-600 max-w-md mx-auto">
+            Try adjusting your filters or check back later for new events.
+          </p>
+        </div>
+      )}
+
       <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
     </div>
   );

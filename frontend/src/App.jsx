@@ -31,7 +31,9 @@ function App() {
 
       <Route element={<ProtectedRoute />}>
         <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/dashboard" element={<RoleRoute role="admin" />}>
+            <Route index element={<Dashboard />} />
+          </Route>
           <Route path="/profile" element={<Profile />} />
           <Route path="/manage-events" element={<RoleRoute role="admin" />}>
             <Route index element={<ManageEvents />} />
