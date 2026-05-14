@@ -12,6 +12,15 @@ function EventCard({ event, onRegister, onCancelRegistration, isRegistered }) {
     return classes[status] || "status-upcoming";
   };
 
+  const handleCancelRegistration = () => {
+    const confirmed = window.confirm(
+      `Are you sure you want to cancel your registration for "${event.title}"?\n\nThis action cannot be undone.`
+    );
+    if (confirmed) {
+      onCancelRegistration(event._id);
+    }
+  };
+
   return (
     <Card className="group flex h-full flex-col gap-3 overflow-hidden p-0 hover:shadow-glow transition-all duration-300">
       <div className="relative h-48 overflow-hidden bg-gradient-to-br from-indigo-100 to-purple-100">
@@ -68,7 +77,7 @@ function EventCard({ event, onRegister, onCancelRegistration, isRegistered }) {
         </Link>
         {onRegister &&
           (isRegistered ? (
-            <Button className="flex-1 btn-danger-modern  h-14" variant="danger" onClick={() => onCancelRegistration(event._id)}>
+            <Button className="flex-1 btn-danger-modern  h-14" variant="danger" onClick={handleCancelRegistration}>
               <svg className="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>

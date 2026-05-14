@@ -5,7 +5,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
      "dev": "nodemon src/app.js",
-     "seed:admin": "node src/seeders/adminSeeder.js"
+     "start": "node src/app.js",
+     "seed:admin": "node src/seeders/adminSeeder.js",
+     "seed:categories": "node src/seeders/categorySeeder.js",
+     "seed:users": "node src/seeders/userSeeder.js",
+     "seed:events": "node src/seeders/eventSeeder.js",
+     "seed:registrations": "node src/seeders/registrationSeeder.js",
+     "seed:all": "npm run seed:admin && npm run seed:categories && npm run seed:users && npm run seed:events && npm run seed:registrations"
   },
   "keywords": [],
   "author": "",
