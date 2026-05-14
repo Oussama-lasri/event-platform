@@ -51,4 +51,4 @@ const seedAdmin = async () => {
   }
 };
 
-export default seedAdmin();
+export default seedAdmin;

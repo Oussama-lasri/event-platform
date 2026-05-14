@@ -1,41 +1,14 @@
-import User from "../models/User.js";
-import Category from "../models/Category.js";
-import Event from "../models/Event.js";
+import connectDB from "../config/db.js";
+import seedAdmin from "./adminSeeder.js";
+import seedCategories from "./categorySeeder.js";
+import seedEvents from "./eventSeeder.js";
 
-export async function seedAll() {
-  // USERS
-  const userExists = await User.findOne({ email: "admin@test.com" });
+export const seedAll = async () => {
+  await connectDB();
 
-  if (!userExists) {
-    await User.create({
-      name: "Admin",
-      email: "admin@test.com",
-      password: "hashed_password_here",
-      role: "admin"
-    });
-  }
+  await seedAdmin();
+  await seedCategories();
+  await seedEvents();
 
-  // CATEGORIES
-  const categories = ["Tech", "Music", "Sports"];
-
-  for (const name of categories) {
-    const exists = await Category.findOne({ name });
-    if (!exists) {
-      await Category.create({ name });
-    }
-  }
-
-  // EVENTS (optional)
-  const eventExists = await Event.countDocuments();
-
-  if (eventExists === 0) {
-    await Event.create({
-      title: "First Event",
-      date: new Date(),
-      category: "Tech",
-      location: "Online"
-    });
-  }
-
-  console.log("Seed completed");
-}
+  console.log("All seeds completed");
+};
