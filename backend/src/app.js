@@ -14,6 +14,7 @@ import dashboardRoutes from "./routes/dashboardRoutes.js";
 import uploadRoutes from "./routes/uploadRoutes.js";
 
 import connectDB from "./config/db.js";
+import { seedAll } from "./seeders/seed.js";
 
 // import seedUsers from "./seeders/userSeeder.js";
 // import seedCategories from "./seeders/categorySeeder.js";
@@ -53,6 +54,8 @@ async function startServer() {
   try {
     // connect database
     await connectDB();
+     // ✅ AUTO-SEED HERE
+    await seedAll();
 
     // run seeders
     // await seedAdmin();
