@@ -11,7 +11,7 @@ This project is fully dockerized with separate containers for the frontend, back
 
 1. **Clone the repository** (if not already done)
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/Oussama-lasri/event-platform
    cd event-platform
    ```
 
