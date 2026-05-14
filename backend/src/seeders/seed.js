@@ -4,11 +4,11 @@ import seedCategories from "./categorySeeder.js";
 import seedEvents from "./eventSeeder.js";
 
 export const seedAll = async () => {
-  await connectDB();
+//   await connectDB();
 
   await seedAdmin();
-  await seedCategories();
-  await seedEvents();
+//   await seedCategories();
+//   await seedEvents();
 
   console.log("All seeds completed");
 };

@@ -7,7 +7,7 @@ import User from "../models/User.js";
 
 dotenv.config();
 
-connectDB();
+// connectDB();
 
 const seedAdmin = async () => {
   try {
@@ -21,7 +21,7 @@ const seedAdmin = async () => {
         "Admin already exists"
       );
 
-      process.exit();
+      // process.exit();
     }
 
     const hashedPassword =
@@ -43,11 +43,11 @@ const seedAdmin = async () => {
 
     console.log(admin);
 
-    process.exit();
+    // process.exit();
   } catch (error) {
     console.error(error);
 
-    process.exit(1);
+    // process.exit(1);
   }
 };
 
